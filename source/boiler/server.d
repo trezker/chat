@@ -16,13 +16,11 @@ import mondo;
 import boiler.model;
 import vibe.http.fileserver;
 
-//import application.user;
 import application.setup;
 
 class Server {
 private:
 	Mongo mongo;
-	//User_model user_model;
 	Model_method[string][string] models;
 public:
 	bool setup() {
@@ -31,8 +29,6 @@ public:
 			return false;
 		}
 
-		//user_model = new User_model;
-		//user_model.setup(mongo, models);
 		setup_models(mongo, models);
 		return true;
 	}
@@ -92,6 +88,7 @@ public:
 	void page(HTTPServerRequest req, HTTPServerResponse res) {
 		try {
 			string path = req.path;
+
 			if(path == "/") {
 				path = "/index";
 			}
