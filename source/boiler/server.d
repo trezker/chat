@@ -78,11 +78,12 @@ public:
 	void page(HTTPServerRequest req, HTTPServerResponse res) {
 		try {
 			string path = application.rewrite_path(req);
+			logInfo(path);
 			if(path == "/") {
 				path = "/index";
 			}
 			else {
-				path = req.requestURL[1..$];
+				path = path[1..$];
 			}
 			string filepath = format("pages/%s.html", path);
 			res.writeBody(filepath.readText, "text/html; charset=UTF-8");

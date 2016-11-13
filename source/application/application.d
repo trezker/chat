@@ -29,7 +29,9 @@ class Application {
 	}
 
 	string rewrite_path(HTTPServerRequest req) {
-		//I think I want to make a class in this file. To make models permanenly available.
+		if(!req.session) {
+			return "/login";
+		}
 		return req.path;
 	}
 }
