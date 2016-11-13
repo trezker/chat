@@ -9,21 +9,15 @@ import vibe.http.websockets : handleWebSockets;
 
 import boiler.server;
 
-import application.user;
-
 shared static this() {
 	auto server = new Server;
-	/*
-	Model_method[string][string] models;
-	auto user_model = new User_model;
-	user_model.setup(mongo, models);
-	server.models = models;
-	*/
+
 	runTask({
 		if(!server.setup()) {
 			exit(-1);
 		}
 	});
+
 	runTask({
 		server.daemon();
 	});

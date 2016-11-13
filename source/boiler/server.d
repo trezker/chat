@@ -12,35 +12,25 @@ import vibe.core.log;
 import vibe.http.websockets : WebSocket;
 import vibe.core.core : sleep;
 import core.time;
-import mondo;
 import boiler.model;
 import vibe.http.fileserver;
 
-import application.setup;
+import application.application;
 
 class Server {
 private:
-	Mongo mongo;
 	Model_method[string][string] models;
+	Application application;
 public:
 	bool setup() {
-		if(!databaseSetup()) {
-			logInfo("Database setup failed.");
+		application = new Application();
+		if(!application.initialize()) {
+			logInfo("Application initialization failed.");
 			return false;
 		}
 
-		setup_models(mongo, models);
+		application.setup_models(models);
 		return true;
-	}
-
-	bool databaseSetup() {
-		try {
-			mongo = new Mongo("mongodb://localhost");
-		}
-		catch(Exception e) {
-			logInfo(e.msg);
-		}
-	    return true;
 	}
 
 	void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInfo error) {
@@ -87,8 +77,7 @@ public:
 	
 	void page(HTTPServerRequest req, HTTPServerResponse res) {
 		try {
-			string path = req.path;
-
+			string path = application.rewrite_path(req);
 			if(path == "/") {
 				path = "/index";
 			}
