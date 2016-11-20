@@ -5,3 +5,7 @@ body {
 a {
    outline: 0;
 }
+
+#chats {
+	margin-bottom: 15px;
+}

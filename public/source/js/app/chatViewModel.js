@@ -2,13 +2,17 @@ var Chat = function(title, messages) {
     this.title = title;
     this.messages = ko.observableArray(messages);
  
-    this.addMessage = function() {
-        this.messages.push("New message");
+    this.addMessage = function(message) {
+        this.messages.push({
+        	content: message
+        });
     }.bind(this);
 }
 
 function ChatViewModel() {
     var self = this;
+    self.currentmessage = ko.observable("");
+    self.chosenChat = ko.observable();
 	self.chats = [
 		new Chat("random1", [
 			{
@@ -35,11 +39,20 @@ function ChatViewModel() {
 			}
 		])
 	];
-    self.chosenChatId = ko.observable();
     self.goToChat = function(chat) {
     	console.log("goto " + chat);
-    	self.chosenChatId(chat);
+    	self.chosenChat(chat);
     };
+	self.onEnter = function(d, e){
+		if(e.keyCode === 13) {
+			if(self.currentmessage() != "") {
+				self.chosenChat().addMessage(self.currentmessage());
+				self.currentmessage("");
+			}
+		}
+		return true;
+	};
+	self.goToChat(self.chats[0]);
 };
 
 var chatViewModel = new ChatViewModel();

@@ -17,7 +17,7 @@
       </div>
       <div class="container" id="chatlist">
           <ul class="nav navbar-nav" data-bind="foreach: chats">
-            <li data-bind="css: { active: $data == $root.chosenChatId() }, 
+            <li data-bind="css: { active: $data == $root.chosenChat() }, 
             			   click: $root.goToChat"">
             	<a href="javaScript:void(0);">
             		<span data-bind="text: title"></span>
@@ -28,10 +28,15 @@
       </div>
     </nav>
 
-    <div id="chats" data-bind="foreach: chats" class="container">
-    	<div data-bind="foreach: messages, css: { hidden: $data != $root.chosenChatId() }">
-    		<div data-bind="text: content"></div>
-    	</div>
+    <div id="chats" class="navbar-fixed-bottom container">
+	    <div data-bind="foreach: chats">
+	    	<div data-bind="foreach: messages, css: { hidden: $data != $root.chosenChat() }">
+	    		<div data-bind="text: content"></div>
+	    	</div>
+	    </div>
+	    <div>
+			<input type="text" class="form-control" data-bind="textInput: currentmessage, event: {keypress: onEnter}" />
+	    </div>
     </div>
 
 	<script type='text/javascript' src='/source/js/lib/knockout-3.4.1.js'></script>
@@ -41,4 +46,4 @@
 	<script type='text/javascript' src='/source/js/app/userViewModel.js'></script>
 	<script type='text/javascript' src='/source/js/app/chatViewModel.js'></script>
 </body>
-</html
+</html>

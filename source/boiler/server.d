@@ -60,7 +60,7 @@ public:
 
 	void ajax(HTTPServerRequest req, HTTPServerResponse res) {
 		try {
-			logInfo(to!string(req.json));
+			//logInfo(to!string(req.json));
 			string model = req.json.model.to!string;
 			string method = req.json.method.to!string;
 			if(model in models && method in models[model]) {
@@ -78,7 +78,7 @@ public:
 	void page(HTTPServerRequest req, HTTPServerResponse res) {
 		try {
 			string path = application.rewrite_path(req);
-			logInfo(path);
+			//logInfo(path);
 			if(path == "/") {
 				path = "/index";
 			}
