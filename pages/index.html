@@ -17,7 +17,8 @@
       </div>
       <div class="container" id="chatlist">
           <ul class="nav navbar-nav" data-bind="foreach: chats">
-            <li>
+            <li data-bind="css: { active: $data == $root.chosenChatId() }, 
+            			   click: $root.goToChat"">
             	<a href="javaScript:void(0);">
             		<span data-bind="text: title"></span>
         			<span class="sr-only"></span>
@@ -28,7 +29,7 @@
     </nav>
 
     <div id="chats" data-bind="foreach: chats" class="container">
-    	<div data-bind="foreach: messages">
+    	<div data-bind="foreach: messages, css: { hidden: $data != $root.chosenChatId() }">
     		<div data-bind="text: content"></div>
     	</div>
     </div>

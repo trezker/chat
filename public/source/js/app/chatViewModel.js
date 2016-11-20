@@ -1,4 +1,4 @@
-var chat = function(title, messages) {
+var Chat = function(title, messages) {
     this.title = title;
     this.messages = ko.observableArray(messages);
  
@@ -7,9 +7,10 @@ var chat = function(title, messages) {
     }.bind(this);
 }
 
-var chatViewModel = {
-	chats: [
-		new chat("random1", [
+function ChatViewModel() {
+    var self = this;
+	self.chats = [
+		new Chat("random1", [
 			{
 				sender: "me",
 				content: "Hello",
@@ -21,7 +22,7 @@ var chatViewModel = {
 				timestamp: "2016-11-19 19:55:00"
 			}
 		]),
-		new chat("match1", [
+		new Chat("match1", [
 			{
 				sender: "me",
 				content: "Woop",
@@ -33,8 +34,14 @@ var chatViewModel = {
 				timestamp: "2016-11-19 19:55:00"
 			}
 		])
-	]
+	];
+    self.chosenChatId = ko.observable();
+    self.goToChat = function(chat) {
+    	console.log("goto " + chat);
+    	self.chosenChatId(chat);
+    };
 };
 
+var chatViewModel = new ChatViewModel();
 ko.applyBindings(chatViewModel, $("#chatlist")[0]);
 ko.applyBindings(chatViewModel, $("#chats")[0]);
