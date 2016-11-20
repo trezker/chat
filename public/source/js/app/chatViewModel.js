@@ -40,14 +40,25 @@ function ChatViewModel() {
 		])
 	];
     self.goToChat = function(chat) {
-    	console.log("goto " + chat);
     	self.chosenChat(chat);
+		var c = $("#chats .history:not(.hidden)");
+		c.scrollTop(c[0].scrollHeight);
     };
 	self.onEnter = function(d, e){
 		if(e.keyCode === 13) {
 			if(self.currentmessage() != "") {
+				//Only scroll to bottom if the user isn't bus reading some history
+				var c = $("#chats .history:not(.hidden)");
+				var scrollToBottom = false;
+				if(c.scrollTop()+c.height() == c[0].scrollHeight) {
+					scrollToBottom = true;
+				}
+				//Add message
 				self.chosenChat().addMessage(self.currentmessage());
 				self.currentmessage("");
+				if(scrollToBottom) {
+					c.scrollTop(c[0].scrollHeight);
+				}
 			}
 		}
 		return true;

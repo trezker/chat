@@ -16,5 +16,10 @@ a {
 }
 
 #chats .history {
-	overflow-y: scroll;
+	overflow-y: auto;
+}
+
+#other {
+	overflow-y: auto;
+	height: 100%;
 }
