@@ -14,3 +14,7 @@ a {
 #chats .navbar-fixed-bottom {
 	z-index: 0;
 }
+
+#chats .history {
+	overflow-y: scroll;
+}

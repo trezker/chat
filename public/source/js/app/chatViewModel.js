@@ -58,3 +58,14 @@ function ChatViewModel() {
 var chatViewModel = new ChatViewModel();
 ko.applyBindings(chatViewModel, $("#chatlist")[0]);
 ko.applyBindings(chatViewModel, $("#chats")[0]);
+
+function resizeChatHistory() {
+	var h = $("#chats .history").position().top + $("#chats .history").offset().top + $("#chats .history").outerHeight() - 100;
+	$("#chats .history").css("max-height", h+"px");
+}
+
+$( window ).resize(function() {
+	resizeChatHistory();
+});
+
+resizeChatHistory();
