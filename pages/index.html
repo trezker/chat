@@ -28,14 +28,73 @@
       </div>
     </nav>
 
-    <div id="chats" class="navbar-fixed-bottom container">
-	    <div data-bind="foreach: chats">
-	    	<div data-bind="foreach: messages, css: { hidden: $data != $root.chosenChat() }">
-	    		<div data-bind="text: content"></div>
-	    	</div>
-	    </div>
-	    <div>
-			<input type="text" class="form-control" data-bind="textInput: currentmessage, event: {keypress: onEnter}" />
+    <div id="page" class="container table-responsive">
+    	<div class="row">
+		    <div id="chats" class="col-md-6">
+		    	<div class="navbar-fixed-bottom">
+					<div class="container">
+					    <div id="chats" class="col-md-6">
+							<div data-bind="foreach: chats">
+								<div data-bind="foreach: messages, css: { hidden: $data != $root.chosenChat() }">
+									<div data-bind="text: content"></div>
+								</div>
+							</div>
+							<div>
+								<input type="text" class="form-control" data-bind="textInput: currentmessage, event: {keypress: onEnter}" />
+							</div>
+						</div>
+					</div>
+				</div>
+		    </div>
+		    <div class="col-md-6">
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    	<div>Other stuff</div>
+		    </div>
 	    </div>
     </div>
 

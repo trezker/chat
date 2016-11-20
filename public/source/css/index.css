@@ -1,11 +1,16 @@
-body {
-	padding-top: 100px;
-}
-
 a {
    outline: 0;
 }
 
+#page {
+	padding-top: 100px;
+	height: 100%;
+}
+
 #chats {
 	margin-bottom: 15px;
+}
+
+#chats .navbar-fixed-bottom {
+	z-index: 0;
 }
