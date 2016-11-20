@@ -11,4 +11,4 @@ var userViewModel = {
 	}
 };
 
-ko.applyBindings(userViewModel);
+ko.applyBindings(userViewModel, $("#usermenu")[0]);
