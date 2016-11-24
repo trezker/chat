@@ -2,20 +2,24 @@ module application.application;
 
 import vibe.http.server;
 import vibe.core.log;
+import vibe.http.websockets : WebSocket;
 
 import mondo;
 import boiler.model;
 
 import application.user;
+import application.sockets;
 
 class Application {
 	Mongo mongo;
 	User_model user_model;
+	Sockets sockets;
 
 	bool initialize() {
 		try {
 			mongo = new Mongo("mongodb://localhost");
 			user_model = new User_model;
+			sockets = new Sockets;
 		}
 		catch(Exception e) {
 			logInfo(e.msg);
@@ -33,5 +37,9 @@ class Application {
 			return "/login";
 		}
 		return req.path;
+	}
+
+	void websocket(scope WebSocket socket) {
+		sockets.new_socket(socket);
 	}
 }

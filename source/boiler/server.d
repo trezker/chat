@@ -94,16 +94,7 @@ public:
 	}
 
 	void websocket(scope WebSocket socket) {
-		int counter = 0;
-		logInfo("Got new web socket connection.");
-		while (true) {
-			sleep(1.seconds);
-			if (!socket.connected) break;
-			counter++;
-			logInfo("Sending '%s'.", counter);
-			socket.send(counter.to!string);
-		}
-		logInfo("Client disconnected.");
+		application.websocket(socket);
 	}
 
 	void preWriteCallback(scope HTTPServerRequest req, scope HTTPServerResponse res, ref string path) {

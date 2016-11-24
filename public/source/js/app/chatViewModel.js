@@ -11,6 +11,17 @@ var Chat = function(title, messages) {
 
 function ChatViewModel() {
     var self = this;
+
+    var wsurl = "ws://" + document.location.host + "/ws";
+    console.log(wsurl);
+	var connection = new WebSocket(wsurl);    
+	connection.onerror = function (error) {
+		console.log('WebSocket Error ' + error);
+	};
+	connection.onmessage = function (e) {
+		console.log('Server: ' + e.data);
+	};
+
     self.currentmessage = ko.observable("");
     self.chosenChat = ko.observable();
 	self.chats = [
@@ -47,6 +58,8 @@ function ChatViewModel() {
 	self.onEnter = function(d, e){
 		if(e.keyCode === 13) {
 			if(self.currentmessage() != "") {
+				connection.send(self.currentmessage());
+
 				//Only scroll to bottom if the user isn't bus reading some history
 				var c = $("#chats .history:not(.hidden)");
 				var scrollToBottom = false;
@@ -59,6 +72,7 @@ function ChatViewModel() {
 				if(scrollToBottom) {
 					c.scrollTop(c[0].scrollHeight);
 				}
+
 			}
 		}
 		return true;
