@@ -6,11 +6,20 @@ import vibe.http.websockets : WebSocket;
 import std.conv : to;
 import std.algorithm : remove;
 
+class Chat {
+	string description;
+	int max_users;
+	string[] participants;
+	string[] banned_users;
+
+}
+
 class Sockets {
 	WebSocket[][string] user_sockets;
+	Chat[] chats;
 
 	void new_socket(scope WebSocket socket) {
-		/* Casting off const only to get the userid. Don't fuck with the const object! */
+		/* Casting off const only to get the userid. Don't mess with the const object! */
 		HTTPServerRequest req = cast(HTTPServerRequest)(socket.request);
 		auto id = req.session.get!string("id");
 		/**/

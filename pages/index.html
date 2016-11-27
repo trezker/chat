@@ -14,9 +14,7 @@
             <li><a href="javaScript:void(0);">User</a></li>
             <li><a data-bind="click: sign_out" href="javaScript:void(0);">Sign out <span class="sr-only"></span></a></li>
           </ul>
-      </div>
-      <div class="container" id="chatlist">
-          <ul class="nav navbar-nav" data-bind="foreach: chats">
+          <ul id="chatlist" class="nav navbar-nav" data-bind="foreach: chats">
             <li data-bind="css: { active: $data == $root.chosenChat() }, 
             			   click: $root.goToChat"">
             	<a href="javaScript:void(0);">
@@ -47,53 +45,35 @@
 				</div>
 		    </div>
 		    <div id="other" class="col-md-6">
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
-		    	<div>Other stuff</div>
+		    	<div id="search_form">
+			    	<div>
+						<input type="text" class="form-control" data-bind="search" placeholder="Search"/>
+					</div>
+			 		<div class="btn-group">
+						<button data-bind="click: announce" class="btn btn-md btn-info">Announce</button>
+						<button data-bind="click: search" class="btn btn-md btn-primary">Search</button>
+						<button data-bind="click: recommend" class="btn btn-md btn-primary">Recommended</button>
+					</div>
+				</div>
+				<div id="search_results">
+					<ul class="nav nav-pills nav-stacked">
+						<li role="presentation" class="active">
+							<a href="javaScript:void(0);">
+								Lets talk
+							</a>
+						</li>
+						<li role="presentation">
+							<a href="javaScript:void(0);">
+								Why do I always think of cars as the first topic of conversation?
+							</a>
+						</li>
+						<li role="presentation">
+							<a href="javaScript:void(0);">
+								I wonder what happens if the description is really long. Will it wrap or just go into overflow?
+							</a>
+						</li>
+					</ul>
+				</div>
 		    </div>
 	    </div>
     </div>

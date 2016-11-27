@@ -3,7 +3,7 @@ a {
 }
 
 #page {
-	padding-top: 100px;
+	padding-top: 50px;
 	height: 100%;
 }
 
@@ -20,6 +20,16 @@ a {
 }
 
 #other {
+	padding-top: 1rem;
 	overflow-y: auto;
 	height: 100%;
+}
+
+#search_form .btn-group {
+	width: 100%;
+	margin-top: 1rem;
+}
+
+#search_results {
+	padding-top: 1rem;
 }
