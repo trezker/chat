@@ -59,7 +59,7 @@ class User_model {
 		string username = req.json.username.to!string;
 		string password = req.json.password.to!string;
 
-		Collection user_collection = mongo.dateone.user;
+		Collection user_collection = mongo.chat.user;
 
 		Query q = new Query();
 		q.conditions["name"] = username;
@@ -97,7 +97,7 @@ class User_model {
 		string username = req.json.username.to!string;
 		string password = req.json.password.to!string;
 
-		Collection user_collection = mongo.dateone.user;
+		Collection user_collection = mongo.chat.user;
 
 		auto success = false;
 		try {
@@ -136,7 +136,7 @@ class User_model {
 			return;
 		}
 
-		Collection user_collection = mongo.dateone.user;
+		Collection user_collection = mongo.chat.user;
 		user_collection.remove(BO(
 				"name", username
 			)

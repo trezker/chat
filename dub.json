@@ -1,6 +1,6 @@
 {
-	"name": "dateone",
-	"description": "Dating site.",
+	"name": "chat",
+	"description": "Chatting site.",
 	"copyright": "Copyright © 2016, Anders Andersson",
 	"authors": ["Anders Andersson"],
 	"dependencies": {
