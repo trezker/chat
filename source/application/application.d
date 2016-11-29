@@ -2,7 +2,6 @@ module application.application;
 
 import vibe.http.server;
 import vibe.core.log;
-import vibe.http.websockets : WebSocket;
 
 import mondo;
 import boiler.model;
@@ -39,7 +38,7 @@ class Application {
 		return req.path;
 	}
 
-	void websocket(scope WebSocket socket) {
-		sockets.new_socket(socket);
+	void websocket(HTTPServerRequest req, HTTPServerResponse res) {
+		sockets.new_socket(req, res);
 	}
 }

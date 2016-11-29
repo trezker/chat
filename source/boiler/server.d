@@ -9,7 +9,6 @@ import std.array;
 import std.format;
 import vibe.http.server;
 import vibe.core.log;
-import vibe.http.websockets : WebSocket;
 import vibe.core.core : sleep;
 import core.time;
 import boiler.model;
@@ -93,10 +92,10 @@ public:
 		}
 	}
 
-	void websocket(scope WebSocket socket) {
-		application.websocket(socket);
+	void websocket(HTTPServerRequest req, HTTPServerResponse res) {
+		application.websocket(req, res);
 	}
-
+	
 	void preWriteCallback(scope HTTPServerRequest req, scope HTTPServerResponse res, ref string path) {
 		logInfo("Path: '%s'.", path);
 		logInfo("req.path: '%s'.", req.path);

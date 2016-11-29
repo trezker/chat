@@ -5,6 +5,7 @@ import vibe.core.log;
 import vibe.http.websockets : WebSocket;
 import std.conv : to;
 import std.algorithm : remove;
+import vibe.http.websockets : handleWebSocket;
 
 class Chat {
 	string description;
@@ -18,7 +19,13 @@ class Sockets {
 	WebSocket[][string] user_sockets;
 	Chat[] chats;
 
-	void new_socket(scope WebSocket socket) {
+	void new_socket(HTTPServerRequest req, HTTPServerResponse res) {
+		auto id = req.session.get!string("id");
+		handleWebSocket(&socket_thread, req, res);
+		//scope dg = (scope WebSocket s) => new_socket(s, user_id)
+	}
+
+	void socket_thread(scope WebSocket socket) {
 		/* Casting off const only to get the userid. Don't mess with the const object! */
 		HTTPServerRequest req = cast(HTTPServerRequest)(socket.request);
 		auto id = req.session.get!string("id");

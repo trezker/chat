@@ -5,7 +5,6 @@ import vibe.core.core;
 import vibe.core.log;
 import vibe.http.router;
 import vibe.http.fileserver;
-import vibe.http.websockets : handleWebSockets;
 
 import boiler.server;
 
@@ -31,7 +30,8 @@ shared static this() {
 	auto router = new URLRouter;
 	router.get("/test", &server.test);
 	router.post("/ajax*", &server.ajax);
-	router.get("/ws", handleWebSockets(&server.websocket));
+	//router.get("/ws", handleWebSockets(&server.websocket));
+	router.get("/ws", &server.websocket);
 	router.get("/source/*", serveStaticFiles("./public/"));
 	router.get("/get/*", &server.get);
 	router.get("/*", &server.page);
