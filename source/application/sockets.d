@@ -42,15 +42,19 @@ class Sockets {
 		auto id = req.session.get!string("id");
 		Socket_context sc = new Socket_context(this, id);
 		logInfo("Got new web socket connection userid: %s", id);
-		user_sockets[id] ~= sc;
-		logInfo("%s", to!string(user_sockets[id].length));
+		synchronized(this) {
+			user_sockets[id] ~= sc;
+			logInfo("%s", to!string(user_sockets[id].length));
+		}
 		handleWebSocket(&sc.socket_thread, req, res);
 	}
 
 	void remove_socket(Socket_context sc) {
 		auto id = sc.user_id;
 		logInfo("Socket disconnected userid: %s", id);
-		user_sockets[id] = remove!(a => a is sc)(user_sockets[id]);
-		logInfo("%s", to!string(user_sockets[id].length));
+		synchronized(this) {
+			user_sockets[id] = remove!(a => a is sc)(user_sockets[id]);
+			logInfo("%s", to!string(user_sockets[id].length));
+		}
 	}
 }
