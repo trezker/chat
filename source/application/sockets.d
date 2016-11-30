@@ -15,30 +15,42 @@ class Chat {
 
 }
 
-class Sockets {
-	WebSocket[][string] user_sockets;
-	Chat[] chats;
+class Socket_context {
+	Sockets sockets;
+	string user_id;
 
-	void new_socket(HTTPServerRequest req, HTTPServerResponse res) {
-		auto id = req.session.get!string("id");
-		handleWebSocket(&socket_thread, req, res);
-		//scope dg = (scope WebSocket s) => new_socket(s, user_id)
+	this(Sockets s, string u) {
+		sockets = s;
+		user_id = u;
 	}
 
 	void socket_thread(scope WebSocket socket) {
-		/* Casting off const only to get the userid. Don't mess with the const object! */
-		HTTPServerRequest req = cast(HTTPServerRequest)(socket.request);
-		auto id = req.session.get!string("id");
-		/**/
-		logInfo("Got new web socket connection userid: %s", id);
-		user_sockets[id] ~= socket;
-
 		while (socket.waitForData()) {
 			auto txt = socket.receiveText;
 			logInfo("Received: %s", txt);
 			socket.send("counter.to!string");
 		}
-		logInfo("Client disconnected.");
-		user_sockets[id] = remove!(a => a is socket)(user_sockets[id]);
+		sockets.remove_socket(this);
+	}
+}
+
+class Sockets {
+	Socket_context[][string] user_sockets;
+	Chat[] chats;
+
+	void new_socket(HTTPServerRequest req, HTTPServerResponse res) {
+		auto id = req.session.get!string("id");
+		Socket_context sc = new Socket_context(this, id);
+		logInfo("Got new web socket connection userid: %s", id);
+		user_sockets[id] ~= sc;
+		logInfo("%s", to!string(user_sockets[id].length));
+		handleWebSocket(&sc.socket_thread, req, res);
+	}
+
+	void remove_socket(Socket_context sc) {
+		auto id = sc.user_id;
+		logInfo("Socket disconnected userid: %s", id);
+		user_sockets[id] = remove!(a => a is sc)(user_sockets[id]);
+		logInfo("%s", to!string(user_sockets[id].length));
 	}
 }
